@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hwy.proj_425.mapper.CustomerMapper">
+
+    <select id="findAllCus" resultType="com.hwy.proj_425.mapper.CustomerMapper">
+        select * from customer
+    </select>
+
+    <select id="getCusById" resultType="com.hwy.proj_425.mapper.CustomerMapper">
+        select * from customer where id=#{id}
+    </select>
+
+    <insert id="createCus" parameterType="com.hwy.proj_425.mapper.CustomerMapper">
+        insert into customer
+        values (#{id},#{firstName},#{lastName},#{totPoint},#{avaPoint},#{address})
+    </insert>
+
+    <delete id="deleteCus" parameterType="java.lang.Integer">
+        delete from customer where id=#{id}
+    </delete>
+</mapper>

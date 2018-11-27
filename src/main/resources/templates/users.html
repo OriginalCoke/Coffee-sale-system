@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Coffee Shop</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div th:if="${not #lists.isEmpty(users)}">
+        <h2>Employee List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Privilege</th>
+                <th>View</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}">Id</a></td>
+                <td th:text="${user.firstName}">First Name</td>
+                <td th:text="${user.lastName}">Last Name</td>
+                <td th:text="${user.privilege}">Privilege</td>
+                <td><a th:href="${ '/user/' + user.id}">View</a></td>
+                <td><a th:href="${'/user/delete/' + user.id}">Delete</a></td>
+            </tr>
+        </table>
+        <div class="row">
+            <button type="button" class="btn btn-default"><a href="#" th:href="@{/user/new}">Create</a></button>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
