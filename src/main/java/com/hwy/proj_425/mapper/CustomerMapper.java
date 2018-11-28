@@ -11,11 +11,11 @@ public interface CustomerMapper {
 
     List<Customer> findAllCus();
 
-    Customer getCusById(String id);
+    Customer getCusById(Integer id);
 
     void createCus(Customer customer);
 
-    void deleteCus(String id);
+    void deleteCus(Integer id);
     void updateCus(Customer customer);
 
 }

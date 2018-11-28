@@ -1,7 +1,7 @@
 package com.hwy.proj_425.entities;
 
 public class Customer {
-    private String id;
+    private Integer id;
     private String firstName;
     private String lastName;
     private Integer totPoint;
@@ -20,11 +20,11 @@ public class Customer {
 //        this.address = address;
 //    }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

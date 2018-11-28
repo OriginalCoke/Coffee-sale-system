@@ -21,7 +21,7 @@ public class SaleServiceImpl implements SaleService{
     @Override
     public void setCustomerById(Integer id)
     {
-        this.customer = customerService.getCusById(id.toString());
+        this.customer = customerService.getCusById(id);
     }
 
     @Override

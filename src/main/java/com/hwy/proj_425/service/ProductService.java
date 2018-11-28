@@ -13,11 +13,11 @@ public class ProductService {
     private ProductMapper productMapper;
 
     public List<Product> findAllProducts(){ return productMapper.findAllProducts();}
-    public Product getProductById(int id) {return productMapper.getProductById(id);}
+    public Product getProductById(Integer id) {return productMapper.getProductById(id);}
 
     public void createProduct(Product product){ productMapper.createProduct(product);}
 
-    public void deleteProduct(int id) {productMapper.deleteProduct(id);}
+    public void deleteProduct(Integer id) {productMapper.deleteProduct(id);}
 
     public void updateProduct(Product product){ productMapper.updateProduct(product);}
 
