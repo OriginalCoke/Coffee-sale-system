@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Coffee Shop</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div th:if="${not #lists.isEmpty(products)}">
+        <h2>Product List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Count</th>
+                <th>Price</th>
+                <th>View</th>
+
+            </tr>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}">Id</td>
+                <td th:text="${product.name}">Name</td>
+                <td th:text="${product.category}">Category</td>
+                <td th:text="${product.count}">Count</td>
+                <td th:text="${product.price}">Price</td>
+                <td><a th:href="${'/product/' + product.id}">View</a></td>
+
+            </tr>
+        </table>
+        <div class="row">
+            <button type="button" class="btn btn-default"><a href="#" th:href="@{/product/new}">Create</a></button>
+        </div>
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

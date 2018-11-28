@@ -20,6 +20,7 @@
                 <th>View</th>
                 <th>Edit</th>
                 <th>Delete</th>
+                <th>Create Sale</th>
             </tr>
             <tr th:each="customer : ${customers}">
                 <td th:text="${customer.id}">Id</a></td>
@@ -31,6 +32,7 @@
                 <td><a th:href="${ '/customer/' + customer.id}">View</a></td>
                 <td><a th:href="${'/customer/edit/' + customer.id}">Edit</a></td>
                 <td><a th:href="${'/customer/delete/' + customer.id}">Delete</a></td>
+                <td><a th:href="${'/sale/customer/' + customer.id}">Create Sale</a></td>
             </tr>
         </table>
         <div class="row">
