@@ -18,4 +18,6 @@ public interface CustomerMapper {
     void deleteCus(Integer id);
     void updateCus(Customer customer);
 
+    void editCus(Customer customer);
+
 }

@@ -29,6 +29,7 @@ public class CustomerController {
     @RequestMapping("customer/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("customer", customerService.getCusById(id));
+        customerService.deleteCus(id);
         return "cusForm";
     }
 
