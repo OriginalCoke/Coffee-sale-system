@@ -16,6 +16,7 @@
         values (#{id},#{firstName},#{lastName},#{privilege},#{userName},#{password})
     </insert>
 
+
     <delete id="deleteUser" parameterType="java.lang.Integer">
         delete from user where id=#{id}
     </delete>

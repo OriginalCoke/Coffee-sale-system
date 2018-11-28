@@ -16,5 +16,6 @@ public interface CustomerMapper {
     void createCus(Customer customer);
 
     void deleteCus(String id);
+    void updateCus(Customer customer);
 
 }

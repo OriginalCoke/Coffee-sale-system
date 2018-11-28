@@ -34,6 +34,7 @@ public class SaleServiceImpl implements SaleService{
     {
         BigDecimal total = getTotal();
         customer.setTotPoint(customer.getTotPoint() + total.intValue());
+        customerService.updateCustomer(customer);
         return customer;
     }
     @Override
