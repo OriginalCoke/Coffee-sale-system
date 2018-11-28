@@ -3,20 +3,26 @@
 
 <mapper namespace="com.hwy.proj_425.mapper.CustomerMapper">
 
-    <select id="findAllCus" resultType="com.hwy.proj_425.mapper.CustomerMapper">
+    <select id="findAllCus" resultType="com.hwy.proj_425.entities.Customer">
         select * from customer
     </select>
 
-    <select id="getCusById" resultType="com.hwy.proj_425.mapper.CustomerMapper">
+    <select id="getCusById" resultType="com.hwy.proj_425.entities.Customer">
         select * from customer where id=#{id}
     </select>
 
-    <insert id="createCus" parameterType="com.hwy.proj_425.mapper.CustomerMapper">
+    <insert id="createCus" parameterType="com.hwy.proj_425.entities.Customer">
         insert into customer
         values (#{id},#{firstName},#{lastName},#{totPoint},#{avaPoint},#{address})
     </insert>
 
-    <delete id="deleteCus" parameterType="java.lang.Integer">
+    <delete id="deleteCus" parameterType="java.lang.String">
         delete from customer where id=#{id}
     </delete>
+
+    <update id="editCus" parameterType="com.hwy.proj_425.entities.Customer">
+        update customer set firstName=#{firstName}, lastName=#{lastName},
+        totPoint=#{totPoint},avaPoint=#{avaPoint},address=#{address}
+        where id=#{id}
+    </update>
 </mapper>

@@ -29,4 +29,8 @@ public class CustomerService {
     public void deleteCus(String id){
         customerMapper.deleteCus(id);
     }
+
+    public void editCus(Customer customer){
+        customerMapper.editCus(customer);
+    }
 }
