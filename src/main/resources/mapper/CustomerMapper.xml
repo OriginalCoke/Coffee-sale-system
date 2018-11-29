@@ -17,7 +17,7 @@
     </insert>
     <update id="updateCus" parameterType="com.hwy.proj_425.entities.Customer">
         update customer
-        set totPoint = #{totPoint}
+        set totPoint = #{totPoint}, avaPoint = #{avaPoint}
         where id = #{id}
     </update>
     <delete id="deleteCus" parameterType="java.lang.Integer">

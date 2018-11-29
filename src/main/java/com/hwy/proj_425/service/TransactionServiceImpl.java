@@ -16,12 +16,12 @@ public class TransactionServiceImpl implements TransactionService{
     @Autowired
     private TransactionMapper transMapper;
     @Override
-    public void createAndSave(Map<Product, Integer> products, Customer customer, User user)
+    public void createAndSave(Map<Product, Integer> products, Customer customer, boolean type)
     {
-        save(getTransaction(products, customer, user));
+        save(getTransaction(products, customer, type));
     }
     @Override
-    public List<Transaction> getTransaction(Map<Product, Integer> products, Customer customer, User user)
+    public List<Transaction> getTransaction(Map<Product, Integer> products, Customer customer, boolean type)
     {
         Date createTime = new Date();
         List<Transaction> res = new ArrayList<>();
@@ -31,13 +31,14 @@ public class TransactionServiceImpl implements TransactionService{
             transaction.setCustomerId(customer.getId());
             transaction.setCustomer(customer);
 
-            transaction.setUserId(user.getId());
-            transaction.setUser(user);
-
             transaction.setProductId(product.getId());
             transaction.setProduct(product);
             transaction.setCount(products.get(product));
+            if(type == true)
             transaction.setTotal(product.getPrice().multiply(BigDecimal.valueOf(products.get(product))));
+            else
+                transaction.setTotal(BigDecimal.valueOf(0));
+
             transaction.setTime(createTime);
             res.add(transaction);
         }
@@ -50,5 +51,11 @@ public class TransactionServiceImpl implements TransactionService{
         {
             transMapper.createTrans(tran);
         }
+    }
+
+    @Override
+    public List<Transaction> showAllTrans()
+    {
+        return transMapper.selectAllTrans();
     }
 }

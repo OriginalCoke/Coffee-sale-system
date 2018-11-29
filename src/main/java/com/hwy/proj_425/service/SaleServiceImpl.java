@@ -3,8 +3,11 @@ package com.hwy.proj_425.service;
 import com.hwy.proj_425.entities.Customer;
 import com.hwy.proj_425.entities.Product;
 import com.hwy.proj_425.entities.User;
+import com.hwy.proj_425.exception.NotEnoughPointException;
+import com.hwy.proj_425.exception.NotEnoughProductsInStockException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -38,6 +41,7 @@ public class SaleServiceImpl implements SaleService{
     {
         BigDecimal total = getTotal();
         customer.setTotPoint(customer.getTotPoint() + total.intValue());
+        customer.setAvaPoint(customer.getAvaPoint() + total.intValue());
         customerService.updateCustomer(customer);
         return customer;
     }
@@ -71,27 +75,24 @@ public class SaleServiceImpl implements SaleService{
     {
         return this.productInSale;
     }
+
     @Override
-    public void checkout() throws Exception
+    public void checkout() throws NotEnoughProductsInStockException
     {
-        changePoint(customer);
+
         for(Map.Entry<Product, Integer> entity : productInSale.entrySet())
         {
             Product product = entity.getKey();
             if(product.getCount() < entity.getValue())
-                throw new Exception("error");
+                throw new NotEnoughProductsInStockException(product);
 
             entity.getKey().setCount(product.getCount() - entity.getValue());
 
         }
-        // create transaction
-        // mock user
-
-        user.setId(3);
-
+        changePoint(customer);
         // create transaction
 
-        transService.createAndSave(productInSale, customer, user);
+        transService.createAndSave(productInSale, customer, true);
 
         // save product with product service
         productService.save(productInSale.keySet());
@@ -109,6 +110,27 @@ public class SaleServiceImpl implements SaleService{
     public boolean makeSelect(boolean result)
     {
         return result;
+    }
+
+    public void freeSale() throws NotEnoughPointException, NotEnoughProductsInStockException
+    {
+        if(customer.getAvaPoint() < 25)
+            throw new NotEnoughPointException();
+        if(productInSale.size() == 1)
+        {
+            Product free = productInSale.keySet().iterator().next();
+            if(free.getCount() < 1)
+                throw new NotEnoughProductsInStockException(free);
+            if(productInSale.get(free) == 1)
+            {
+
+                customer.setAvaPoint(customer.getAvaPoint() - 25);
+                customerService.updateCustomer(customer);
+                transService.createAndSave(productInSale, customer, false);
+                productService.updateProduct(free);
+                productInSale.clear();
+            }
+        }
     }
 
 

@@ -8,8 +8,8 @@ public class Transaction {
     Integer id;
 
     Customer customer;
-    User user;
-    Integer userId;
+  //  User user;
+   // Integer userId;
     Product product;
 
     BigDecimal total;
@@ -54,13 +54,13 @@ public class Transaction {
         this.customer = customer;
     }
 
-    public User getUser() {
+  /*  public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
+    }*/
 
     public BigDecimal getTotal() {
         return total;
@@ -78,10 +78,13 @@ public class Transaction {
         this.count = count;
     }
 
+    /*public Integer getUserId() {
+        return userId;
+    }
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
+    }*/
     public Integer getProductId() {
         return productId;
     }
@@ -96,26 +99,7 @@ public class Transaction {
     public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
-    /*
-    public void setCusInfo(Customer customer)
-    {
-        setCustomer(customer);
-        setCustomerId(customer.getId());
-    }
 
-    public void setUserInfo(User user)
-    {
-        setUser(user);
-        setUserId(user.getId());
-    }
-
-    public void setProductInfo(Product product, Integer count)
-    {
-        setProduct(product);
-        setProductId(product.getId());
-        setCount(count);
-        setTotal(product.getPrice().multiply(BigDecimal.valueOf(count)));
-    }*/
 
 
 
