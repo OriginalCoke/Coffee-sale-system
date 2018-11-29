@@ -14,4 +14,8 @@ public interface UserMapper {
     void createUser(User user);
 
     void deleteUser(Integer id);
+
+    User getUserByUserName(String userName);
+
+    User login(String userName, String password);
 }

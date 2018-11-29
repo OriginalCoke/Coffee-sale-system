@@ -28,4 +28,13 @@ public class UserService {
     public void deleteUser(Integer id) {
         userMapper.deleteUser(id);
     }
+
+    public User getUserByUserName(String userName){
+        return userMapper.getUserByUserName(userName);
+    }
+
+    public User login(User user){
+        user=this.userMapper.login(user.getUserName(),user.getPassword());
+        return user;
+    }
 }

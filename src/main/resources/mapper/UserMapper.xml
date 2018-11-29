@@ -19,4 +19,8 @@
     <delete id="deleteUser" parameterType="java.lang.Integer">
         delete from user where id=#{id}
     </delete>
+
+    <select id="login" resultType="com.hwy.proj_425.entities.User">
+        select * from user where userName=#{userName} and password=#{password}
+    </select>
 </mapper>
