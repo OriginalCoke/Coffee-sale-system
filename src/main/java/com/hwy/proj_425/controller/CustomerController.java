@@ -21,13 +21,13 @@ public class CustomerController {
     }
 
     @RequestMapping("customer/{id}")
-    public String findCusById(@PathVariable String id, Model model) {
+    public String findCusById(@PathVariable Integer id, Model model) {
         model.addAttribute("customer", customerService.getCusById(id));
         return "cusDetail";
     }
 
     @RequestMapping("customer/edit/{id}")
-    public String edit(@PathVariable String id, Model model) {
+    public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("customer", customerService.getCusById(id));
         customerService.deleteCus(id);
         return "cusForm";
@@ -46,7 +46,7 @@ public class CustomerController {
     }
 
     @RequestMapping("customer/delete/{id}")
-    public String deleteCus(@PathVariable String id) {
+    public String deleteCus(@PathVariable Integer id) {
         customerService.deleteCus(id);
         return "redirect:/customers";
     }

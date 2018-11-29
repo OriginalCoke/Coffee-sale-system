@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hwy.proj_425.mapper.ProductMapper">
+    <select id="findAllProducts" resultType="com.hwy.proj_425.entities.Product">
+        select * from product
+    </select>
+    <select id="getProductById" resultType="com.hwy.proj_425.entities.Product">
+        select * from product where id = #{id}
+    </select>
+
+    <insert id = "createProduct" parameterType="com.hwy.proj_425.entities.Product">
+        insert into product(id, name, category, count, price) values (#{id}, #{name}, #{category}, #{count}, #{price})
+    </insert>
+
+    <update id="updateProduct" parameterType="com.hwy.proj_425.entities.Product">
+        update product
+        set count = #{count}
+        where id = #{id}
+    </update>
+    <delete id="deleteProduct" parameterType="java.lang.Integer">
+        delete from product where id = #{id}
+    </delete>
+</mapper>

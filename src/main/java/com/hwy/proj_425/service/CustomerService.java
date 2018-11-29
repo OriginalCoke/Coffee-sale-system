@@ -18,7 +18,7 @@ public class CustomerService {
         return customerMapper.findAllCus();
     }
 
-    public Customer getCusById(String id){
+    public Customer getCusById(Integer id){
         return customerMapper.getCusById(id);
     }
 
@@ -26,11 +26,15 @@ public class CustomerService {
         customerMapper.createCus(customer);
     }
 
-    public void deleteCus(String id){
+    public void deleteCus(Integer id){
         customerMapper.deleteCus(id);
     }
 
-    public void editCus(Customer customer){
-        customerMapper.editCus(customer);
+    public void updateCustomer(Customer customer)
+    {
+        customerMapper.updateCus(customer);
     }
+  /*  public void editCus(Customer customer){
+        customerMapper.editCus(customer);
+    }*/
 }

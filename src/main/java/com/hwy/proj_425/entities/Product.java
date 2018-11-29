@@ -1,20 +1,22 @@
 package com.hwy.proj_425.entities;
 
+import java.math.BigDecimal;
+
 public class Product {
-    private String id;
+    private Integer id;
     private String name;
     private String category;
     private int count;
-    private double price;
+    private BigDecimal price;
 
     public Product() {
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -42,11 +44,26 @@ public class Product {
         this.count = count;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+
+        return id.equals(product.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }
