@@ -1,15 +1,42 @@
 package com.hwy.proj_425.entities;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 public class Transaction {
     Integer id;
+
     Customer customer;
     User user;
+    Integer userId;
+    Product product;
+
     BigDecimal total;
     Integer count;
-    List<Order> orders;
+    Date time;
+
+
+    Integer productId;
+    Integer customerId;
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+
 
     public Integer getId() {
         return id;
@@ -51,11 +78,46 @@ public class Transaction {
         this.count = count;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+    public Integer getProductId() {
+        return productId;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+    /*
+    public void setCusInfo(Customer customer)
+    {
+        setCustomer(customer);
+        setCustomerId(customer.getId());
+    }
+
+    public void setUserInfo(User user)
+    {
+        setUser(user);
+        setUserId(user.getId());
+    }
+
+    public void setProductInfo(Product product, Integer count)
+    {
+        setProduct(product);
+        setProductId(product.getId());
+        setCount(count);
+        setTotal(product.getPrice().multiply(BigDecimal.valueOf(count)));
+    }*/
+
+
+
+
 }

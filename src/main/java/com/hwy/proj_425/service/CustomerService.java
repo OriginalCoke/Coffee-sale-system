@@ -30,7 +30,11 @@ public class CustomerService {
         customerMapper.deleteCus(id);
     }
 
-    public void editCus(Customer customer){
-        customerMapper.editCus(customer);
+    public void updateCustomer(Customer customer)
+    {
+        customerMapper.updateCus(customer);
     }
+  /*  public void editCus(Customer customer){
+        customerMapper.editCus(customer);
+    }*/
 }

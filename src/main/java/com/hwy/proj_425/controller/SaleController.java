@@ -5,6 +5,7 @@ import com.hwy.proj_425.entities.Product;
 import com.hwy.proj_425.service.ProductService;
 import com.hwy.proj_425.service.SaleService;
 import com.hwy.proj_425.service.SaleServiceImpl;
+import com.hwy.proj_425.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ public class SaleController {
     private SaleServiceImpl saleService;
     @Autowired
     private ProductService productService;
+
     @RequestMapping("/customer/{customerId}")
     public String Sale(Model model, @PathVariable("customerId") Integer id)
     {

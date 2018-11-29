@@ -2,6 +2,7 @@ package com.hwy.proj_425.service;
 
 import com.hwy.proj_425.entities.Customer;
 import com.hwy.proj_425.entities.Product;
+import com.hwy.proj_425.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,10 @@ public class SaleServiceImpl implements SaleService{
     ProductService productService;
     @Autowired
     CustomerService customerService;
-
+    @Autowired
+    private TransactionService transService;
+    //Mock user;
+    private final User user = new User();
     Customer customer;
     Map<Product, Integer> productInSale = new HashMap<>();
     @Override
@@ -80,6 +84,14 @@ public class SaleServiceImpl implements SaleService{
             entity.getKey().setCount(product.getCount() - entity.getValue());
 
         }
+        // create transaction
+        // mock user
+
+        user.setId(3);
+
+        // create transaction
+
+        transService.createAndSave(productInSale, customer, user);
 
         // save product with product service
         productService.save(productInSale.keySet());

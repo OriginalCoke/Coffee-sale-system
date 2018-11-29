@@ -1,7 +1,6 @@
 package com.hwy.proj_425.entities;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public class Product {
     private Integer id;
@@ -9,7 +8,6 @@ public class Product {
     private String category;
     private int count;
     private BigDecimal price;
-    private List<Order> orders;
 
     public Product() {
     }
@@ -52,16 +50,6 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public void setOrders(List<Order> orders)
-    {
-        this.orders = orders;
-    }
-
-    public List<Order> getOrders()
-    {
-        return this.orders;
     }
 
     @Override
