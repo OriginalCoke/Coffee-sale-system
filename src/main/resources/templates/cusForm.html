@@ -9,6 +9,7 @@
 <body>
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div class="alert alert-info" th:if="${errormsg}" th:utext="${errormsg}"></div>
     <h2>Edit</h2>
     <div>
         <form class="form-horizontal" th:object="${customer}" th:action="@{/customer}" method="post">

@@ -1,6 +1,7 @@
 package com.hwy.proj_425.controller;
 
 import com.hwy.proj_425.entities.Customer;
+import com.hwy.proj_425.exception.DuplicateIdException;
 import com.hwy.proj_425.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
-
+    private String errormsg;
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public String findAllCus(Model model) {
         model.addAttribute("customers", customerService.findAllCus());
@@ -40,8 +41,14 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "customer", method = RequestMethod.POST)
-    public String createCus(Customer customer) {
-        customerService.createCus(customer);
+    public String createCus(Customer customer, Model model) {
+        try{
+            customerService.createCus(customer);
+        }catch (DuplicateIdException e)
+        {
+            model.addAttribute("errormsg", e.getMessage());
+            return "cusForm";
+        }
         return "redirect:/customer/" + customer.getId();
     }
 
