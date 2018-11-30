@@ -18,9 +18,11 @@
                     <a class="navbar-brand" href="#" th:href="@{/}">Home</a>
                     <ul class="nav navbar-nav">
                         <li th:if="${#request.isUserInRole('ADMIN')}"><a href="#" th:href="@{/users}">User</a></li>
-                        <li><a href="#" th:href="@{/customers}">Customer</a></li>
-                        <li><a href="#" th:href="@{/products}">Product</a></li>
-                        <li><a href="#" th:href="@{/logout}" methods="post">Log out</a></li>
+                        <li th:if="${#request.isUserInRole('ADMIN') or #request.isUserInRole('USER')}"><a href="#" th:href="@{/customers}">Customer</a></li>
+                        <li th:if="${#request.isUserInRole('ADMIN') or #request.isUserInRole('USER')}"><a href="#" th:href="@{/products}">Product</a></li>
+                        <li th:if="${#request.isUserInRole('ADMIN')}"><a href="#" th:href="@{/trans/}">Transaction</a></li>
+                        <li sec:authorize access="isAuthenticated()" th:if="${#request.isUserInRole('ADMIN') or #request.isUserInRole('USER')}"><a href="#" th:href="@{/logout}" methods="post">Log out</a></li>
+                        <li th:if="${!#request.isUserInRole('ADMIN') and !#request.isUserInRole('USER')}"><a href="#" th:href="@{/login}">Log in</a></li>
                     </ul>
                 </div>
             </div>

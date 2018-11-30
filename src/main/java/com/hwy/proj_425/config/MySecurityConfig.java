@@ -39,7 +39,6 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 //                .withUser("bbb").password("{noop}123").roles("USER");
 //    }
 
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
