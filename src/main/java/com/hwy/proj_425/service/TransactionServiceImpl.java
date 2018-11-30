@@ -85,7 +85,7 @@ public class TransactionServiceImpl implements TransactionService{
         Period period = Period.between(dateA, dateB);
 
         if(period.getYears() > 0) return -1;
-        return period.getMonths();
+        return Math.abs(period.getMonths());
     }
 
     private List<Transaction> findTransInMonthDiff(int monthDiff)
@@ -96,16 +96,20 @@ public class TransactionServiceImpl implements TransactionService{
         Transaction lastTrans = transactions.get(transactions.size() - 1);
 
         List<Transaction> res = new ArrayList<>();
-        //res.add(lastTrans);
         Date lastDate = lastTrans.getTime();
         for(int i = transactions.size() - 1; i >=0; i--)
         {
             Transaction item = transactions.get(i);
             Date date = item.getTime();
-            if(compareMonth(lastDate, date) < monthDiff)
+
+            if(compareMonth(lastDate, date) <= monthDiff)
                 res.add(item);
+            else
+                break;
+
 
         }
         return res;
     }
+
 }
