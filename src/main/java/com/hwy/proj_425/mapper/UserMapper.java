@@ -2,9 +2,11 @@ package com.hwy.proj_425.mapper;
 
 import com.hwy.proj_425.entities.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
-@Mapper
+@Component
 public interface UserMapper {
 
     List<User> findAllUsers();
@@ -14,8 +16,4 @@ public interface UserMapper {
     void createUser(User user);
 
     void deleteUser(Integer id);
-
-    User getUserByUserName(String userName);
-
-    User login(String userName, String password);
 }

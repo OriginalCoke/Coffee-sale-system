@@ -6,7 +6,10 @@ public class User {
     private String lastName;
     private String userName;
     private String password;
-    private int privilege;
+    private Integer privilege;
+    private String role;
+    private Boolean enable;
+
 
     public User() {
     }
@@ -54,19 +57,35 @@ public class User {
         this.userName = userName;
     }
 
-    public int getPrivilege() {
-        return privilege;
-    }
-
-    public void setPrivilege(int privilege) {
-        this.privilege = privilege;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(Integer privilege) {
+        this.privilege = privilege;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
     }
 }
