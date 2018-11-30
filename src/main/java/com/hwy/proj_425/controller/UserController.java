@@ -3,6 +3,7 @@ package com.hwy.proj_425.controller;
 import com.hwy.proj_425.entities.User;
 import com.hwy.proj_425.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +36,8 @@ public class UserController {
 
     @RequestMapping(value = "user", method = RequestMethod.POST)
     public String createUser(User user) {
+        String pw = user.getPassword();
+        user.setPassword(new BCryptPasswordEncoder().encode(pw));
         userService.createUser(user);
         return "redirect:/user/" + user.getId();
     }
