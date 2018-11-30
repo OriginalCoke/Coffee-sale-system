@@ -17,7 +17,6 @@
                 <th>Count</th>
                 <th>Price</th>
                 <th>View</th>
-
             </tr>
             <tr th:each="product : ${products}">
                 <td th:text="${product.id}">Id</td>
@@ -26,17 +25,12 @@
                 <td th:text="${product.count}">Count</td>
                 <td th:text="${product.price}">Price</td>
                 <td><a th:href="${'/product/' + product.id}">View</a></td>
-
             </tr>
         </table>
+    </div>
         <div class="row">
             <button type="button" class="btn btn-default"><a href="#" th:href="@{/product/new}">Create</a></button>
         </div>
-    </div>
-
-
 </div>
-
-
 </body>
 </html>
