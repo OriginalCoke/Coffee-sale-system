@@ -36,20 +36,19 @@ public class UserController {
 
     @RequestMapping(value = "user", method = RequestMethod.POST)
     public String createUser(User user, Model model) {
-    public String createUser(User user) {
         if (user != null) user.setEnable(true);
         String pw = user.getPassword();
         user.setPassword(new BCryptPasswordEncoder().encode(pw));
-        try
-        {userService.createUser(user);}
-        catch(Exception e) {
+        if (user.getPrivilege() == 1) user.setRole("ROLE_ADMIN");
+        else user.setRole("ROLE_USER");
+        try {
+            userService.createUser(user);
+        } catch (Exception e) {
             model.addAttribute("errorMsg", e.getMessage());
             model.addAttribute("user", new User());
             return "userForm";
         }
-        if (user.getPrivilege() == 1) user.setRole("ROLE_ADMIN");
-        else user.setRole("ROLE_USER");
-        userService.createUser(user);
+//        userService.createUser(user);
         return "redirect:/user/" + user.getId();
     }
 
