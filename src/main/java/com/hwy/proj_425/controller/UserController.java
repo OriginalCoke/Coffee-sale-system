@@ -35,10 +35,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "user", method = RequestMethod.POST)
-    public String createUser(User user) {
+    public String createUser(User user, Model model) {
         String pw = user.getPassword();
         user.setPassword(new BCryptPasswordEncoder().encode(pw));
-        userService.createUser(user);
+        try
+        {userService.createUser(user);}
+        catch(Exception e) {
+            model.addAttribute("errorMsg", e.getMessage());
+            model.addAttribute("user", new User());
+            return "userForm";
+        }
         return "redirect:/user/" + user.getId();
     }
 

@@ -11,6 +11,10 @@
         select * from user where id=#{id}
     </select>
 
+    <select id="getUserByName" resultType="com.hwy.proj_425.entities.User">
+        select * from user where userName=#{userName}
+    </select>
+
     <insert id="createUser" parameterType="com.hwy.proj_425.entities.User">
         insert into user
         values (#{id},#{firstName},#{lastName},#{privilege},#{userName},#{password})

@@ -46,7 +46,7 @@ public class CustomerController {
             customerService.createCus(customer);
         }catch (DuplicateIdException e)
         {
-            model.addAttribute("errormsg", e.getMessage());
+            model.addAttribute("errorMsg", e.getMessage());
             return "cusForm";
         }
         return "redirect:/customer/" + customer.getId();

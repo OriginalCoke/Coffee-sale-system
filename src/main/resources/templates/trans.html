@@ -30,7 +30,32 @@
             </tr>
         </table>
     </div>
+    <div>
+        <h2>Transaction Total In Period</h2>
+        <table class="table table-striped">
+            <tr>
 
+                <th>Time Period</th>
+                <th>Sale Total</th>
+                <th>Product Count</th>
+            </tr>
+            <tr>
+                <td>One Month</td>
+                <td th:text="${transInMonth}">One Month</td>
+                <td th:text="${countInMonth}">One Month</td>
+            </tr>
+            <tr>
+                <td>Three Month</td>
+                <td th:text="${transInThreeMonth}">Three Month</td>
+                <td th:text="${countInThreeMonth}">One Month</td>
+            </tr>
+            <tr>
+                <td>One Year</td>
+                <td th:text="${transInYear}">One Year</td>
+                <td th:text="${countInYear}">One Month</td>
+            </tr>
+        </table>
+    </div>
 
 </div>
 
