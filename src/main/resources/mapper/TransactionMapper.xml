@@ -8,13 +8,12 @@
     <result column="total" property="total"/>
     <result column="count" property="count"/>
     <result column="time" property="time"/>
-    <result column="userId" property="userId" />
     <result column="cusId" property="customerId"/>
     <result column="proId" property="productId" />
     <association property="customer" javaType="com.hwy.proj_425.entities.Customer">
         <id property="id" column="c_id"  />
-        <result property="firstname" column="firstname"/>
-        <result property="lastname" column="lastname"/>
+        <result property="firstName" column="firstname"/>
+        <result property="lastName" column="lastname"/>
     </association>
     <association property="product" javaType="com.hwy.proj_425.entities.Product">
         <id property="id" column="p_id"/>
@@ -24,7 +23,7 @@
 </resultMap>
 
     <select id="selectAllTrans" resultMap="TransResultMap">
-        select t.id, t.total, t.count, t.time, t.userId, t.cusId, t.proId,
+        select t.id, t.total, t.count, t.time, t.cusId, t.proId,
         c.id c_id, c.firstname, c.lastname,
         p.id p_id, p.name as p_name, p.price
         from trans as t
@@ -33,7 +32,7 @@
     </select>
 
     <insert id="createTrans" parameterType="com.hwy.proj_425.entities.Transaction">
-        insert into trans (cusId, proId, userId, total, `count`, time)
-        values ( #{customerId}, #{productId}, #{userId}, #{total}, #{count}, #{time})
+        insert into trans (cusId, proId, total, `count`, time)
+        values ( #{customerId}, #{productId}, #{total}, #{count}, #{time})
     </insert>
 </mapper>

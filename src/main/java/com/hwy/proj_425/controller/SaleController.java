@@ -2,6 +2,7 @@ package com.hwy.proj_425.controller;
 
 import com.hwy.proj_425.entities.Customer;
 import com.hwy.proj_425.entities.Product;
+import com.hwy.proj_425.exception.NotEnoughProductsInStockException;
 import com.hwy.proj_425.service.ProductService;
 import com.hwy.proj_425.service.SaleService;
 import com.hwy.proj_425.service.SaleServiceImpl;
@@ -23,6 +24,7 @@ public class SaleController {
     @Autowired
     private ProductService productService;
 
+    private String errorMessage;
     @RequestMapping("/customer/{customerId}")
     public String Sale(Model model, @PathVariable("customerId") Integer id)
     {
@@ -32,7 +34,13 @@ public class SaleController {
         model.addAttribute("products", productService.findAllProducts());
         model.addAttribute("productsInSale", saleService.getAllProductsInSale());
         model.addAttribute("total", saleService.getTotal().toString());
+        String message = "Shuai";
+        model.addAttribute("message", message);
+        if(errorMessage != null)
+            model.addAttribute("outOfStockMessage", errorMessage);
+        errorMessage = null;
         return "salePage";
+
 
     }
 
@@ -53,9 +61,38 @@ public class SaleController {
         return "redirect:/sale/customer/" + saleService.getCustomer().getId();
     }
     @RequestMapping("/checkout")
-    public String checkout(Model model) throws Exception
+    public String checkout(Model model)
     {
-        saleService.checkout();
+        try{
+            saleService.checkout();
+        }
+        catch (NotEnoughProductsInStockException e)
+        {
+
+            errorMessage = e.getMessage();
+            return "redirect:/sale/customer/" + saleService.getCustomer().getId();
+
+        }
+
         return "redirect:/sale/customer/" + saleService.getCustomer().getId();
     }
+
+    @RequestMapping("/freeSale")
+    public String freeSale(Model model)
+    {
+        try{
+            saleService.freeSale();
+        }
+        catch (Exception e)
+        {
+
+            errorMessage = e.getMessage();
+            return "redirect:/sale/customer/" + saleService.getCustomer().getId();
+
+        }
+
+        return "redirect:/sale/customer/" + saleService.getCustomer().getId();
+    }
+
+
 }
