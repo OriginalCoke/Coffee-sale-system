@@ -2,6 +2,7 @@ package com.hwy.proj_425.service;
 
 
 import com.hwy.proj_425.entities.Customer;
+import com.hwy.proj_425.exception.DuplicateIdException;
 import com.hwy.proj_425.mapper.CustomerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,9 @@ public class CustomerService {
         return customerMapper.getCusById(id);
     }
 
-    public void createCus(Customer customer){
+    public void createCus(Customer customer) throws DuplicateIdException {
+        if(getCusById(customer.getId())!= null)
+            throw new DuplicateIdException();
         customerMapper.createCus(customer);
     }
 
@@ -32,6 +35,7 @@ public class CustomerService {
 
     public void updateCustomer(Customer customer)
     {
+
         customerMapper.updateCus(customer);
     }
   /*  public void editCus(Customer customer){

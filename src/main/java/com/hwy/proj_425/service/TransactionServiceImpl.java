@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.*;
 
 @Service
@@ -54,8 +57,55 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
-    public List<Transaction> showAllTrans()
+    public List<Transaction> findAllTrans()
     {
         return transMapper.selectAllTrans();
+    }
+
+    public BigDecimal calTotal(int monthDiff)
+    {
+
+        List<Transaction> res = findTransInMonthDiff(monthDiff);
+        return res.stream().map(trans -> trans.getTotal())
+                  .reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
+    }
+
+    public Integer calCount(int monthDiff)
+    {
+
+        List<Transaction> res = findTransInMonthDiff(monthDiff);
+
+        return res.stream().map(trans -> trans.getCount())
+                .reduce( (a, b) -> a + b).orElse(0);
+    }
+    private int compareMonth(Date date1, Date date2)
+    {
+        LocalDate dateA = date1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate dateB = date2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Period period = Period.between(dateA, dateB);
+
+        if(period.getYears() > 0) return -1;
+        return period.getMonths();
+    }
+
+    private List<Transaction> findTransInMonthDiff(int monthDiff)
+    {
+        List<Transaction> transactions = findAllTrans();
+
+        transactions.sort(Comparator.comparing(Transaction::getTime));
+        Transaction lastTrans = transactions.get(transactions.size() - 1);
+
+        List<Transaction> res = new ArrayList<>();
+        //res.add(lastTrans);
+        Date lastDate = lastTrans.getTime();
+        for(int i = transactions.size() - 1; i >=0; i--)
+        {
+            Transaction item = transactions.get(i);
+            Date date = item.getTime();
+            if(compareMonth(lastDate, date) < monthDiff)
+                res.add(item);
+
+        }
+        return res;
     }
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Mapper
+@Component
 public interface UserMapper {
 
     List<User> findAllUsers();
@@ -16,4 +16,7 @@ public interface UserMapper {
     void createUser(User user);
 
     void deleteUser(Integer id);
+
+    User getUserByName(String userName);
+
 }
