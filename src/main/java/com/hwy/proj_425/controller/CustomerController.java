@@ -44,7 +44,7 @@ public class CustomerController {
     public String createCus(Customer customer, Model model) {
         try{
             customerService.createCus(customer);
-        }catch (DuplicateIdException e)
+        }catch (Exception e)
         {
             model.addAttribute("errorMsg", e.getMessage());
             return "cusForm";
