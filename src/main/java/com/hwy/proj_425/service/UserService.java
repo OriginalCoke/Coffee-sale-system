@@ -3,7 +3,7 @@ package com.hwy.proj_425.service;
 import com.hwy.proj_425.entities.User;
 import com.hwy.proj_425.exception.DuplicateIdException;
 import com.hwy.proj_425.exception.ExistUserException;
-import com.hwy.proj_425.exception.IdException;
+import com.hwy.proj_425.exception.pointException;
 import com.hwy.proj_425.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +24,9 @@ public class UserService {
         return userMapper.getUserById(id);
     }
 
-    public void createUser(User user) throws DuplicateIdException , ExistUserException, IdException {
+    public void createUser(User user) throws DuplicateIdException , ExistUserException, pointException {
         if(user.getId() < 0)
-            throw new IdException();
+            throw new pointException();
         if(getUserById(user.getId())  != null)
             throw new DuplicateIdException();
         if(getUserByName(user.getUserName()) != null)
