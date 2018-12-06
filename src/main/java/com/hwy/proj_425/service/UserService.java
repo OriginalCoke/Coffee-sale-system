@@ -6,6 +6,7 @@ import com.hwy.proj_425.exception.ExistUserException;
 import com.hwy.proj_425.exception.pointException;
 import com.hwy.proj_425.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
+//    @Cacheable(cacheNames = {"user"})
     public List<User> findAllUsers() {
         return userMapper.findAllUsers();
     }
