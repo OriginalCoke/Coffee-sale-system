@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @EnableWebSecurity
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
@@ -26,6 +28,9 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/**", "/users/**").hasRole("ADMIN")
                 .antMatchers("/trans/**").hasRole("ADMIN");
         http.formLogin();
+//        Date login = new Date();
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
+//        String loginTime = dateFormat.format(login);
         http.logout();
         http.rememberMe();
     }

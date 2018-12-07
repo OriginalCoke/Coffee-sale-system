@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @MapperScan(value = "com.hwy.proj_425.mapper")
 @SpringBootApplication
-@EnableCaching
+//@EnableCaching
 public class Proj425Application {
 
     public static void main(String[] args) {
