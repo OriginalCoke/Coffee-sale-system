@@ -3,10 +3,7 @@ package com.hwy.proj_425.controller;
 import com.hwy.proj_425.entities.Customer;
 import com.hwy.proj_425.entities.Product;
 import com.hwy.proj_425.exception.NotEnoughProductsInStockException;
-import com.hwy.proj_425.service.ProductService;
-import com.hwy.proj_425.service.SaleService;
-import com.hwy.proj_425.service.SaleServiceImpl;
-import com.hwy.proj_425.service.TransactionService;
+import com.hwy.proj_425.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +20,8 @@ public class SaleController {
     private SaleServiceImpl saleService;
     @Autowired
     private ProductService productService;
-
+    @Autowired
+    private CustomerService customerService;
     private String errorMessage;
     @RequestMapping("/customer/{customerId}")
     public String Sale(Model model, @PathVariable("customerId") Integer id)
@@ -39,6 +37,9 @@ public class SaleController {
         if(errorMessage != null)
             model.addAttribute("outOfStockMessage", errorMessage);
         errorMessage = null;
+
+        if(customerService.getCusById(id).getAvaPoint() >= 25)
+            model.addAttribute("alertMessage", "your avaPoint is over 25, get a free coffee?");
         return "salePage";
 
 

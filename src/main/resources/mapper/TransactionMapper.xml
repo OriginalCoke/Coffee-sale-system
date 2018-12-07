@@ -31,6 +31,10 @@
         left join product as p on t.proId = p.id;
     </select>
 
+    <select id="getPriceByTime" parameterType="java.util.Date" resultType="java.math.BigDecimal">
+        select sum(total) from trans where 'time' > #{start}
+    </select>
+
     <insert id="createTrans" parameterType="com.hwy.proj_425.entities.Transaction">
         insert into trans (cusId, proId, total, `count`, time)
         values ( #{customerId}, #{productId}, #{total}, #{count}, #{time})

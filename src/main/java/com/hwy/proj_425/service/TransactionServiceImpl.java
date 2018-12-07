@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -109,6 +111,31 @@ public class TransactionServiceImpl implements TransactionService{
 
 
         }
+        return res;
+    }
+    public BigDecimal getByTime(String start, String end)
+    {
+        BigDecimal res1 = transMapper.getPriceByTime(strToDate(start));
+        BigDecimal res2 = transMapper.getPriceByTime(strToDate(end));
+        if(res1 == null)
+            res1 = new BigDecimal(0);
+        if(res2 == null)
+            res2 = new BigDecimal(0);
+        return res1.min(res2);
+    }
+
+    private Date strToDate(String str)
+    {
+        DateFormat f = new SimpleDateFormat("yyyy-mm-dd");
+
+        Date res = new Date();
+        try{
+            res = f.parse(str);
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
         return res;
     }
 
