@@ -6,15 +6,20 @@ import com.hwy.proj_425.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 @Controller
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
     private String errormsg;
+
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public String findAllCus(Model model) {
         model.addAttribute("customers", customerService.findAllCus());
@@ -41,11 +46,10 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "customer", method = RequestMethod.POST)
-    public String createCus(Customer customer, Model model) {
-        try{
+    public String createCus(Customer customer, Model model, BindingResult bindingResult) {
+        try {
             customerService.createCus(customer);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             model.addAttribute("errorMsg", e.getMessage());
             return "cusForm";
         }

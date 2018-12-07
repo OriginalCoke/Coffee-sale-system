@@ -24,7 +24,17 @@ public class CustomerService {
         return customerMapper.getCusById(id);
     }
 
-    public void createCus(Customer customer) throws DuplicateIdException, pointException {
+    public void createCus(Customer customer) throws DuplicateIdException, pointException, TypeNotPresentException {
+        String temp = customer.getFakeTot();
+        boolean flag = false;
+        for (int i = 0; i < temp.length(); i++) {
+            if (temp.charAt(i) > '9' || temp.charAt(i) < '0') {
+                flag = true;
+                break;
+//                throw new TypeNotPresentException();
+            }
+        }
+        if(flag) throw new TypeNotPresentException();
         if (customer.getAvaPoint() < 0 || customer.getTotPoint() < 0)
             throw new pointException();
         if (getCusById(customer.getId()) != null)

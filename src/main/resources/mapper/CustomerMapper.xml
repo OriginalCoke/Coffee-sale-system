@@ -13,7 +13,7 @@
 
     <insert id="createCus" parameterType="com.hwy.proj_425.entities.Customer">
         insert into customer
-        values (#{id},#{firstName},#{lastName},#{totPoint},#{avaPoint},#{address})
+        values (#{id},#{firstName},#{lastName},#{fakeTot},#{avaPoint},#{address})
     </insert>
     <update id="updateCus" parameterType="com.hwy.proj_425.entities.Customer">
         update customer

@@ -1,12 +1,16 @@
 package com.hwy.proj_425.entities;
 
+import javax.validation.constraints.Digits;
+
 public class Customer {
     private Integer id;
     private String firstName;
     private String lastName;
+//    @Digits(integer = 6,fraction = 2,message = "Please input digits!")
     private Integer totPoint;
     private Integer avaPoint;
     private String address;
+    private String fakeTot;
 
     public Customer() {
     }
@@ -19,6 +23,15 @@ public class Customer {
 //        this.avaPoint = avaPoint;
 //        this.address = address;
 //    }
+
+
+    public String getFakeTot() {
+        return fakeTot;
+    }
+
+    public void setFakeTot(String fakeTot) {
+        this.fakeTot = fakeTot;
+    }
 
     public Integer getId() {
         return id;
