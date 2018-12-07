@@ -127,6 +127,7 @@ public class SaleServiceImpl implements SaleService{
                 customer.setAvaPoint(customer.getAvaPoint() - 25);
                 customerService.updateCustomer(customer);
                 transService.createAndSave(productInSale, customer, false);
+                free.setCount(free.getCount() - 1);
                 productService.updateProduct(free);
                 productInSale.clear();
             }

@@ -70,6 +70,7 @@
         <div class="row">
             <button type="button" class="btn btn-default"><a href="#" th:href="@{/sale/checkout/}">CheckOut</a></button>
         </div>
+        <div class="alert alert-info" th:if="${alertMessage}" th:utext="${alertMessage}"></div>
         <div class="row">
             <button type="button" class="btn btn-default"><a href="#" th:href="@{/sale/freeSale/}">freeSale</a></button>
         </div>

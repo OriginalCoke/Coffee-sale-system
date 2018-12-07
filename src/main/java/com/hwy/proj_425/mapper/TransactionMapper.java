@@ -1,8 +1,10 @@
 package com.hwy.proj_425.mapper;
 
 import com.hwy.proj_425.entities.Transaction;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 @Component
@@ -11,5 +13,5 @@ public interface TransactionMapper {
     //Transaction selectTransById(Integer id);
     List<Transaction> selectAllTrans();
 
-    //List<Transaction> selectByTime(Date startTime, Date endTime);
+    BigDecimal getPriceByTime(@Param("start") Date startTime);
 }
