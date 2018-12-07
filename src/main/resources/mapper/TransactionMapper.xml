@@ -3,24 +3,24 @@
 
 <mapper namespace="com.hwy.proj_425.mapper.TransactionMapper">
 
-<resultMap id="TransResultMap" type="com.hwy.proj_425.entities.Transaction">
-    <id column="id" property="id"/>
-    <result column="total" property="total"/>
-    <result column="count" property="count"/>
-    <result column="time" property="time"/>
-    <result column="cusId" property="customerId"/>
-    <result column="proId" property="productId" />
-    <association property="customer" javaType="com.hwy.proj_425.entities.Customer">
-        <id property="id" column="c_id"  />
-        <result property="firstName" column="firstname"/>
-        <result property="lastName" column="lastname"/>
-    </association>
-    <association property="product" javaType="com.hwy.proj_425.entities.Product">
-        <id property="id" column="p_id"/>
-        <result property="name" column="p_name"/>
-        <result property="price" column="price" />
-    </association>
-</resultMap>
+    <resultMap id="TransResultMap" type="com.hwy.proj_425.entities.Transaction">
+        <id column="id" property="id"/>
+        <result column="total" property="total"/>
+        <result column="count" property="count"/>
+        <result column="time" property="time"/>
+        <result column="cusId" property="customerId"/>
+        <result column="proId" property="productId"/>
+        <association property="customer" javaType="com.hwy.proj_425.entities.Customer">
+            <id property="id" column="c_id"/>
+            <result property="firstName" column="firstname"/>
+            <result property="lastName" column="lastname"/>
+        </association>
+        <association property="product" javaType="com.hwy.proj_425.entities.Product">
+            <id property="id" column="p_id"/>
+            <result property="name" column="p_name"/>
+            <result property="price" column="price"/>
+        </association>
+    </resultMap>
 
     <select id="selectAllTrans" resultMap="TransResultMap">
         select t.id, t.total, t.count, t.time, t.cusId, t.proId,
@@ -31,8 +31,12 @@
         left join product as p on t.proId = p.id;
     </select>
 
-    <select id="getPriceByTime" parameterType="java.util.Date" resultType="java.math.BigDecimal">
-        select sum(total) from trans where 'time' > #{start}
+    <select id="getPriceByTime" parameterType="java.lang.String" resultType="java.math.BigDecimal">
+        select sum(total) from trans where time > #{start}
+    </select>
+
+    <select id="getByPeriod" parameterType="java.lang.String">
+        select sum(total) from trans where time between (#{start},#{end});
     </select>
 
     <insert id="createTrans" parameterType="com.hwy.proj_425.entities.Transaction">

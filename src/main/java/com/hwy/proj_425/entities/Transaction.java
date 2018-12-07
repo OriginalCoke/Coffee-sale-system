@@ -8,8 +8,8 @@ public class Transaction {
     Integer id;
 
     Customer customer;
-  //  User user;
-   // Integer userId;
+    //  User user;
+    // Integer userId;
     Product product;
 
     BigDecimal total;
@@ -35,7 +35,6 @@ public class Transaction {
     public void setTime(Date time) {
         this.time = time;
     }
-
 
 
     public Integer getId() {
@@ -96,12 +95,8 @@ public class Transaction {
     public Integer getCustomerId() {
         return customerId;
     }
+
     public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
     }
-
-
-
-
-
 }

@@ -21,8 +21,7 @@ public class TransController {
     TransactionService transactionService;
 
     @RequestMapping("/")
-    public String showAllTrans(Model model)
-    {
+    public String showAllTrans(Model model) {
         model.addAttribute("transactions", transactionService.findAllTrans());
 
         model.addAttribute("transInMonth", transactionService.calTotal(1));
@@ -34,15 +33,15 @@ public class TransController {
         model.addAttribute("countInYear", transactionService.calCount(12));
         return "trans";
     }
+
     @GetMapping("/period")
-    public String showForm(Model model)
-    {
+    public String showForm(Model model) {
         model.addAttribute("startAndEnd", new StartAndEnd());
         return "periodTotal";
     }
+
     @PostMapping("/period")
-    public String getByTime(Model model, StartAndEnd startAndEnd)
-    {
+    public String getByTime(Model model, StartAndEnd startAndEnd) {
         String start = startAndEnd.getStart();
         String end = startAndEnd.getEnd();
         System.out.println(start + " " + end);
@@ -56,4 +55,20 @@ public class TransController {
 
         return "periodDetail";
     }
+
+//    @PostMapping("/period")
+//    public String getByTime(Model model, StartAndEnd startAndEnd) {
+//        String start = startAndEnd.getStart();
+//        String end = startAndEnd.getEnd();
+////        System.out.println(start + " " + end);
+//        BigDecimal res = transactionService.getByPeriod(start, end);
+//
+//        model.addAttribute("start", start);
+//        model.addAttribute("end", end);
+//        model.addAttribute("total", res);
+//        System.out.println(res.toString());
+//
+//
+//        return "periodDetail";
+//    }
 }

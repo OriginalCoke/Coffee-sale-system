@@ -18,4 +18,5 @@ public interface TransactionService {
     BigDecimal calTotal(int monthDiff);
     Integer calCount(int monthDiff);
     BigDecimal getByTime(String start, String end);
+    BigDecimal getByPeriod(String start, String end);
 }
