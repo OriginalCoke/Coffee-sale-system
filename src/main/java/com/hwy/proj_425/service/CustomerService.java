@@ -3,6 +3,7 @@ package com.hwy.proj_425.service;
 
 import com.hwy.proj_425.entities.Customer;
 import com.hwy.proj_425.exception.DuplicateIdException;
+import com.hwy.proj_425.exception.TypeException;
 import com.hwy.proj_425.exception.pointException;
 import com.hwy.proj_425.mapper.CustomerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +25,19 @@ public class CustomerService {
         return customerMapper.getCusById(id);
     }
 
-    public void createCus(Customer customer) throws DuplicateIdException, pointException, TypeNotPresentException {
+    public void createCus(Customer customer) throws DuplicateIdException, pointException, TypeException {
         String temp = customer.getFakeTot();
         boolean flag = false;
         for (int i = 0; i < temp.length(); i++) {
             if (temp.charAt(i) > '9' || temp.charAt(i) < '0') {
                 flag = true;
                 break;
-//                throw new TypeNotPresentException();
             }
         }
-        if(flag) throw new TypeNotPresentException();
+        if (flag){
+            customer.setTotPoint(0);
+            throw new TypeException();
+        } else customer.setTotPoint(Integer.parseInt(temp));
         if (customer.getAvaPoint() < 0 || customer.getTotPoint() < 0)
             throw new pointException();
         if (getCusById(customer.getId()) != null)
